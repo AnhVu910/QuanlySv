@@ -10,26 +10,27 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class QLSV extends javax.swing.JFrame {
+
     DefaultTableModel table;
-    List<Student> svlist= new ArrayList<>();
+    List<Student> svlist = new ArrayList<>();
+
     /**
      * Creates new form QLSV
      */
     public QLSV() {
         initComponents();
-        table= (DefaultTableModel) qlsv.getModel();
+        table = (DefaultTableModel) qlsv.getModel();
         showSV();
     }
-    
-    private void showSV(){ // hien thi toan bo thong tin sinh vien len bang
-         svlist= CrudStudent.hienthi();
+
+    private void showSV() { // hien thi toan bo thong tin sinh vien len bang
+        svlist = CrudStudent.hienthi();
         table.setRowCount(0); // xoa toan bo du lieu trong bang
-        
+
         // add lan luot tung thanh phan vao bang
-        for(Student sv:svlist){
-            table.addRow(new Object[] {table.getRowCount()+1, sv.getName(), sv.getGender(), sv.getEmail(), sv.getNumber()});
+        for (Student sv : svlist) {
+            table.addRow(new Object[]{table.getRowCount() + 1, sv.getName(), sv.getGender(), sv.getEmail(), sv.getNumber()});
         }
     }
 
@@ -229,77 +230,73 @@ public class QLSV extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        String name=hoten.getText();
-        String gender=gioitinh.getSelectedItem().toString();
-        String em=email.getText();
-        String number=sdt.getText();
-        
-        Student sv= new Student(name, gender, em, number);
+        String name = hoten.getText();
+        String gender = gioitinh.getSelectedItem().toString();
+        String em = email.getText();
+        String number = sdt.getText();
+
+        Student sv = new Student(name, gender, em, number);
         CrudStudent.add(sv);
-        
+
         showSV();
     }//GEN-LAST:event_addActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-        int vitri=qlsv.getSelectedRow(); // lay ra vi tri ma sinh vien can xoa dang dung
-        if(vitri >= 0){
-            Student sv=  svlist.get(vitri);
-            
-            int option= JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa sinh viên này không?");
-            if(option == 0){
+        int vitri = qlsv.getSelectedRow(); // lay ra vi tri ma sinh vien can xoa dang dung
+        if (vitri >= 0) {
+            Student sv = svlist.get(vitri);
+
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa sinh viên này không?");
+            if (option == 0) {
                 CrudStudent.delete(sv.getId());
-                
+
                 showSV();
             }
         }
     }//GEN-LAST:event_deleteActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-     
-      
-        String name=hoten.getText();
-        String gender=gioitinh.getSelectedItem().toString();
-        String em=email.getText();
-        String number=sdt.getText();
+        int vitri = qlsv.getSelectedRow(); // lay ra vi tri ma sinh vien can xoa dang dung
+                if (vitri >= 0) {
+                  Student  sv = svlist.get(vitri);
+                  
+
+                    hoten.setText(sv.getName());
+                    gioitinh.setSelectedItem(sv.getGender());
+                    email.setText(sv.getEmail());
+                    sdt.setText(sv.getNumber());
+                    
+                    
+                     String name = hoten.getText();
+                    String gender = gioitinh.getSelectedItem().toString();
+                    String em = email.getText();
+                    String number = sdt.getText();
         
-        
-        Student sv= new Student(name, gender, em, number);
-        CrudStudent.update(sv);
-         showSV();
-        JOptionPane.showMessageDialog(this, "Cập nhật sinh viên thành công!!!");
-        
-       
-        
+                    CrudStudent.update(sv);
+                    showSV();
+                    
+
+                }
+                JOptionPane.showMessageDialog(this, "Cập nhật sinh viên thành công!!!");
+
+
     }//GEN-LAST:event_updateActionPerformed
 
     private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
         // TODO add your handling code here:
-        
-         String input= JOptionPane.showInputDialog(this, "Nhập họ tên sinh viên cần sửa!!");
-        if(input.length()>0 ) {
-            svlist=CrudStudent.timSV(input);
-            
-            for(Student sv:svlist){
-                hoten.setText(sv.getName());
-                gioitinh.setSelectedItem(sv.getGender());
-                email.setText(sv.getEmail());
-                sdt.setText(sv.getNumber());
-                
-                
-                 table.setRowCount(0); // xoa toan bo du lieu trong bang
-        
-                 // add lan luot tung thanh phan vao bang
-      
-                table.addRow(new Object[] {table.getRowCount()+1, sv.getName(), sv.getGender(), sv.getEmail(), sv.getNumber()});
-                
+
+        String input = JOptionPane.showInputDialog(this, "Nhập họ tên sinh viên cần sửa!!");
+        if (input.length() > 0) {
+            svlist = CrudStudent.timSV(input);
+            table.setRowCount(0); // xoa toan bo du lieu trong bang
+            for (Student sv : svlist) {
+                // add lan luot tung thanh phan vao bang
+
+                table.addRow(new Object[]{table.getRowCount() + 1, sv.getName(), sv.getGender(), sv.getEmail(), sv.getNumber()});
                 
             }
-            int vitri=qlsv.getSelectedRow(); // lay ra vi tri ma sinh vien can xoa dang dung
-        if(vitri >= 0){
-            Student sv=  svlist.get(vitri);
-            
-        }
+
         }
 
     }//GEN-LAST:event_findActionPerformed
