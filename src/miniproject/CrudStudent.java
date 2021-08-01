@@ -101,7 +101,7 @@ public class CrudStudent {
     }
     
     //update sinh vien
-    public static void update(Student sv){
+    public static void update(Student sv,int id){
         Connection connect=null;
         PreparedStatement statement=null; // lay du lieu tư database
         try {
@@ -117,7 +117,7 @@ public class CrudStudent {
             statement.setString(2, sv.getGender());
             statement.setString(3, sv.getEmail());
             statement.setString(4, sv.getNumber());
-            statement.setInt(5, sv.getId());
+            statement.setInt(5, id);
 
             
                 statement.execute(); // thuc hien qua trinh update du lieu

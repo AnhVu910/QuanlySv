@@ -43,6 +43,8 @@ public class QLSV extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         hoten = new javax.swing.JTextField();
@@ -59,6 +61,8 @@ public class QLSV extends javax.swing.JFrame {
         find = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         qlsv = new javax.swing.JTable();
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,27 +262,22 @@ public class QLSV extends javax.swing.JFrame {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         int vitri = qlsv.getSelectedRow(); // lay ra vi tri ma sinh vien can xoa dang dung
-                if (vitri >= 0) {
-                  Student  sv = svlist.get(vitri);
-                  
+        if (vitri >= 0) {
+            Student sv = svlist.get(vitri);
 
-                    hoten.setText(sv.getName());
-                    gioitinh.setSelectedItem(sv.getGender());
-                    email.setText(sv.getEmail());
-                    sdt.setText(sv.getNumber());
-                    
-                    
-                     String name = hoten.getText();
-                    String gender = gioitinh.getSelectedItem().toString();
-                    String em = email.getText();
-                    String number = sdt.getText();
-        
-                    CrudStudent.update(sv);
-                    showSV();
-                    
+            int id = sv.getId();
+            sv.setName(hoten.getText());
+            sv.setGender(gioitinh.getSelectedItem().toString());
+            sv.setEmail(email.getText());
+            sv.setNumber(sdt.getText());
+            
+            
+            CrudStudent.update(sv,id);
+            showSV();
 
-                }
-                JOptionPane.showMessageDialog(this, "Cập nhật sinh viên thành công!!!");
+        }
+        JOptionPane.showMessageDialog(this, "Cập nhật sinh viên thành công!!!");
+
 
 
     }//GEN-LAST:event_updateActionPerformed
@@ -349,6 +348,8 @@ public class QLSV extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTable qlsv;
     private javax.swing.JButton reset;
     private javax.swing.JTextField sdt;
