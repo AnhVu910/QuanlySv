@@ -8,25 +8,26 @@ package miniproject;
 
 public class Student {
     int id;
-    String name, gender, email, number;
+    String name, gender, email, number,masv;
+
+    
 
     public Student() {
     }
 
-    public Student(int id, String name, String gender, String email, String number) {
+    public Student(int id, String name,String masv, String gender, String email, String number ) {
         this.id = id;
         this.name = name;
+        this.masv = masv;
         this.gender = gender;
         this.email = email;
         this.number = number;
+        
     }
 
-    public Student(String name, String gender, String email, String number) {
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.number = number;
-    }
+ 
+
+    
 
     public void setId(int id) {
         this.id = id;
@@ -34,6 +35,10 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+     public void setMasv(String masv) {
+        this.masv = masv;
     }
 
     public void setGender(String gender) {
@@ -48,6 +53,8 @@ public class Student {
         this.number = number;
     }
     
+   
+    
     
 
     public int getId() {
@@ -56,6 +63,10 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+    
+    public String getMasv() {
+        return masv;
     }
 
     public String getGender() {
@@ -69,6 +80,10 @@ public class Student {
     public String getNumber() {
         return number;
     }
+
+    
+
+    
     
    
    
